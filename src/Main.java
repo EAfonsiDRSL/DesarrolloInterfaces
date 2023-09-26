@@ -9,16 +9,16 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         JFrame j = new JFrame("Formulario");
         j.setBounds(900,10,900,900);
-        j.setVisible(true);
+
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel apellidos, nombre, sexo, nacionalidad, fechanacimiento, dni, Titulo;
         JTextField ap, nom, sex, naci, fecha, nie;
         JButton boton = new JButton("enviar");
         boton.setBounds(120,250,100,50);
-
 
         Titulo = new JLabel("Formulario de salud pública");
         Titulo.setFont(new Font("Agency FB",Font.BOLD,45));
@@ -39,7 +39,6 @@ public class Main {
         sex = new JTextField(50);
         sex.setBounds(100,110,100,20);
 
-
         nacionalidad =new JLabel("Nacionalidad");
         nacionalidad.setBounds(10,100,200,100);
         naci = new JTextField(50);
@@ -58,10 +57,21 @@ public class Main {
 
         j.getContentPane().setLayout(null);
 
+        JPanel p = new JPanel();
+        p.setBackground(Color.BLUE);
+        p.add(apellidos);
+
+
+        JPanel p2 = new JPanel();
+        p2.setBackground(Color.red);
+        p2.setLayout(new FlowLayout());
+        p2.add(nombre);
+
+
 
         j.add(Titulo);
-        j.add(apellidos);
-        j.add(nombre);
+        //j.add(apellidos);
+        //j.add(nombre);
         j.add(sexo);
         j.add(nacionalidad);
         j.add(fechanacimiento);
@@ -73,8 +83,10 @@ public class Main {
         j.add(fecha);
         j.add(nie);
         j.add(boton);
+        j.add(p);
+        j.add(p2);
         j.getContentPane().setBackground(Color.PINK);
 
-
+        j.setVisible(true);
     }
 }
