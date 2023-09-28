@@ -7,57 +7,80 @@ public class Formulario {
     public static void main(String[] args) {
 
         JFrame miventana = new JFrame("Formulario");
+
+        JButton boton = new JButton("Enviar");
+
+        JLabel nombre, apellidos, domicilio, nacionalidad, fechaNacimiento, dni, sexo;
+        nombre =  new JLabel("Nombre");
+        apellidos = new JLabel("Apellidos");
+        domicilio = new JLabel("Domicilio");
+        nacionalidad = new JLabel("Nacionalidad");
+        fechaNacimiento = new JLabel("Fecha de nacimiento");
+        dni = new JLabel("DNI");
+        sexo = new JLabel("Sexo");
+
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
         JPanel izq = new JPanel();
-        izq.setLayout(new GridLayout(7,2));
+        izq.setLayout(new GridLayout(7,1));
         izq.setBackground(Color.pink);
+        JPanel der = new JPanel();
+        der.setLayout(new GridLayout(7,1));
+        der.setBackground(Color.GREEN);
+        JPanel opcionesSexo= new JPanel();
+        opcionesSexo.setLayout(new GridLayout(1, 2));
 
-        JTextField name, ap, dom, nac, fec, nie;
+
+        JTextField name, ap, dom, fec, nie;
         name = new JTextField();
         ap = new JTextField();
         dom = new JTextField();
-        nac = new JTextField();
         fec = new JTextField();
         nie = new JTextField();
 
-        ArrayList<JLabel> campos = new ArrayList<>();
-        campos.add(new JLabel("Nombre"));
-        campos.add(new JLabel("Apellidos"));
-        campos.add(new JLabel("Domicilio"));
-        campos.add(new JLabel("Nacionalidad"));
-        campos.add( new JLabel("Fecha de nacimiento"));
-        campos.add( new JLabel("DNI"));
-        campos.add(new JLabel("Sexo"));
+        ButtonGroup buttonGroup = new ButtonGroup();
 
-        for (JLabel e : campos){
-            izq.add(e);
-        }
+        JRadioButton caja1, caja2;
+        caja1 = new JRadioButton("Hombre");
+        caja2 = new JRadioButton("Mujer");
+
+        buttonGroup.add(caja1);
+        buttonGroup.add(caja2);
 
 
-
-        JCheckBox caja1, caja2;
-        caja1 = new JCheckBox("Hombre");
-        caja2 = new JCheckBox("Mujer");
-
-        String[] opciones = {null,"Hombre","Mujer","Prefiero no contestar"};
+        String[] opciones = {null,"Española","Holandes","Ecuatoriana"};
         JComboBox<String> caja = new JComboBox<>(opciones);
 
 
         miventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        miventana.setBounds(500,250,600,600);
+        miventana.setBounds(500,250,800,800);
 
-        /*izq.add(nombre);izq.add(name);
-        izq.add(apellidos);izq.add(ap);
-        izq.add(domicilio);izq.add(dom);
-        izq.add(nacionalidad);izq.add(nac);
-        izq.add(fechaNacimiento);izq.add(fec);
-        izq.add(dni);izq.add(nie);
-        izq.add(sexo);izq.add(caja);*/
+        izq.add(nombre);
+        izq.add(apellidos);
+        izq.add(domicilio);
+        izq.add(nacionalidad);
+        izq.add(fechaNacimiento);
+        izq.add(dni);
+        izq.add(sexo);
+
+        der.add(name);
+        der.add(ap);
+        der.add(dom);
+        der.add(caja);
+        der.add(fec);
+        der.add(nie);
+        der.add(caja1);
+
+        opcionesSexo.add(caja1);
+        opcionesSexo.add(caja2);
+
 
 
         main.add(izq, BorderLayout.WEST);
+        main.add(der, BorderLayout.EAST);
+        main.add(opcionesSexo, BorderLayout.PAGE_END);
         miventana.add(main);
+        miventana.add(boton);
 
 
         miventana.setLayout(new FlowLayout(FlowLayout.LEFT));
