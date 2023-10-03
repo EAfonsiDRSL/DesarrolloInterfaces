@@ -37,10 +37,6 @@ public class Calculadora {
         etiqueta2.setLayout(null);
         etiqueta2.setBounds(130,40,100,60);
 
-        int filas = 5;
-        int columnas = 4;
-
-
         main = new JPanel();
         teclado = new JPanel();
         pantalla = new JPanel();
@@ -61,7 +57,6 @@ public class Calculadora {
         texto_en_pantalla.setBounds(x,25,anchura_texto,30);
 
 
-        teclado.setLayout(new GridLayout(filas, columnas));
         main.setLayout(null);
         main.setBackground(Color.decode("#F9EBEA"));
         main.setBounds(400,400,100,100);
@@ -231,6 +226,7 @@ public class Calculadora {
         gbc.gridheight=1;
         cero.setBackground(Color.decode("#99A3A4"));
         teclado.add(cero,gbc);
+
         cero.addActionListener(e -> {
             String textoActual = texto_en_pantalla.getText();
             textoActual += "0";

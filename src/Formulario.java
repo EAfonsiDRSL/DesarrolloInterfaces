@@ -83,8 +83,6 @@ public class Formulario {
         miventana.add(boton);
 
 
-        miventana.setLayout(new FlowLayout(FlowLayout.LEFT));
-
         miventana.setVisible(true);
     }
 }

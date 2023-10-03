@@ -29,8 +29,6 @@ public class fa {
         miventana.add(main);
 
 
-        miventana.setLayout(new FlowLayout(FlowLayout.LEFT));
-
         miventana.setVisible(true);
     }
 }
