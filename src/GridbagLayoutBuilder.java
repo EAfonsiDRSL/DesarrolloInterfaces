@@ -1,48 +1,33 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.FlowLayout;
 
 public class GridbagLayoutBuilder {
 
     public static void main(String[] args) {
 
-        JFrame jf = new JFrame("FlowLayout");
-        jf.setLayout(new BorderLayout());
-        jf.setResizable(true);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setSize(600, 400);
-
-        JPanel jp1 = new JPanel(new GridBagLayout());
-        JPanel p2 = new JPanel();
-        p2.setBounds(0,0,550,300);
-
-
-        JLabel name, street, city, zip, address, phone, age, description;
-        JTextField tn,tstr,tcity,tzip, tphone, tage;
-        JTextArea desc;
-        JButton submit = new JButton("Submit");
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill= GridBagConstraints.HORIZONTAL;
-        gbc.insets= new Insets(2,5,2,5);
-
-
         JFrame ventana = new JFrame("GridbagLayout build");
 
-        ventana.setSize(500,500);
+        ventana.setSize(700,400);
         ventana.setResizable(true);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        JTextField nombre, calle, ciudad, codigo_postal, telefono, edad, descripcion;
-        JButton boton = new JButton("Submit");
+        JLabel name, street, city, zip, address, phone, age, description;
+        JTextArea desc;
+        JTextField nombre, calle, ciudad, codigo_postal, telefono, edad;
+        JButton boton;
         JPanel panel = new JPanel();
+        JPanel panel2 = new JPanel();
 
 
         panel.setLayout(new GridBagLayout());
+        panel.setSize(550,300);
+
+        panel2.setBounds(0,0,700,300);
+        panel2.setBackground(Color.cyan);
+
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(2,5,2,5);
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
@@ -50,8 +35,8 @@ public class GridbagLayoutBuilder {
         name = new JLabel("Full Name");
         gbc.gridx = 0;
         gbc.gridy = 0;
+        name.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(name,gbc);
-
 
         nombre = new JTextField();
         gbc.gridx = 1;
@@ -62,26 +47,32 @@ public class GridbagLayoutBuilder {
         street = new JLabel("Street");
         gbc.gridx = 1;
         gbc.gridy = 1;
+        gbc.gridwidth=1;
+        street.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(street,gbc);
 
         city = new JLabel("City");
         gbc.gridx = 2;
         gbc.gridy = 1;
+        city.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(city,gbc);
 
         zip = new JLabel("Zip Code");
         gbc.gridx = 3;
         gbc.gridy = 1;
+        zip.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(zip,gbc);
 
         address = new JLabel("Address");
         gbc.gridx = 0;
         gbc.gridy = 2;
+        address.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(address,gbc);
 
         calle = new JTextField();
         gbc.gridx = 1;
         gbc.gridy = 2;
+
         panel.add(calle,gbc);
 
         ciudad = new JTextField();
@@ -97,6 +88,7 @@ public class GridbagLayoutBuilder {
         phone = new JLabel("Phone");
         gbc.gridx = 0;
         gbc.gridy = 3;
+        phone.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(phone,gbc);
 
         telefono = new JTextField();
@@ -107,6 +99,7 @@ public class GridbagLayoutBuilder {
         age = new JLabel("Age");
         gbc.gridx = 2;
         gbc.gridy = 3;
+        age.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(age,gbc);
 
         edad = new JTextField();
@@ -117,15 +110,30 @@ public class GridbagLayoutBuilder {
         description = new JLabel("Description");
         gbc.gridx = 0;
         gbc.gridy = 4;
+        description.setHorizontalAlignment(SwingConstants.RIGHT);
+        description.setVerticalAlignment(SwingConstants.TOP);
         panel.add(description,gbc);
 
-        descripcion = new JTextField();
+        desc = new JTextArea();
         gbc.gridx = 1;
         gbc.gridy = 4;
-        panel.add(descripcion,gbc);
+        gbc.gridwidth = 3;
+        gbc.ipady = 200;
+        panel.add(desc,gbc);
+
+        boton = new JButton("Submit");
+        gbc.gridx = 2;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.ipady = 0;
+        panel.add(boton,gbc);
+
+        panel.setPreferredSize(new Dimension(500,350));
 
 
-        ventana.add(panel);
+        panel2.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel2.add(panel);
+        ventana.add(panel2);
         ventana.setVisible(true);
     }
 }
