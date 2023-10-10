@@ -58,7 +58,7 @@ public class Calculadora {
 
 
         main.setLayout(null);
-        main.setBackground(Color.decode("#F9EBEA"));
+        //main.setBackground(Color.decode("#F9EBEA"));
         main.setBounds(400,400,100,100);
 
         teclado.setLayout(new GridBagLayout());

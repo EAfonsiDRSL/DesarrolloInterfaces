@@ -64,7 +64,7 @@ public class Main {
 
         JPanel p2 = new JPanel();
         p2.setBackground(Color.red);
-        p2.setLayout(new FlowLayout());
+        //p2.setLayout(new FlowLayout());
         p2.add(nombre);
 
 

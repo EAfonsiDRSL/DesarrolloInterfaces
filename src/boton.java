@@ -23,7 +23,7 @@ public class boton {
         miprimeraventana.add(panel01);
         miprimeraventana.add(panel02);
 
-        miprimeraventana.setLayout(new FlowLayout());
+       // miprimeraventana.setLayout(new FlowLayout());
         //miprimeraventana.setLayout(new GridLayout());
         //miprimeraventana.setLayout(new BorderLayout());
         //miprimeraventana.setLayout(new GridBagLayout());
