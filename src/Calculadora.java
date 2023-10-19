@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Calculadora {
+    public static void main(String[] args) {
+        calculadora();
+    }
 
     public static void calculadora(){
 
@@ -15,8 +16,31 @@ public class Calculadora {
         JLabel etiqueta = new JLabel();
         JLabel etiqueta2 = new JLabel();
 
+
+
         JButton suma, resta, multiplicacion, division, cero, igual, coma, c, ce, porcentaje, uno, dos, tres, cuatro, cinco, seis, siete, ocho,
-                nueve;
+                nueve, negativos;
+        suma = new JButton("+");
+        resta = new JButton("-");
+        multiplicacion = new JButton("x");
+        division = new JButton("/");
+        cero = new JButton("0");
+        igual = new JButton("=");
+        coma = new JButton(",");
+        c = new JButton("C");
+        ce = new JButton("CE");
+        porcentaje = new JButton("%");
+        uno = new JButton("1");
+        dos = new JButton("2");
+        tres = new JButton("3");
+        cuatro = new JButton("4");
+        cinco = new JButton("5");
+        seis = new JButton("6");
+        siete = new JButton("7");
+        ocho = new JButton("8");
+        nueve = new JButton("9");
+        negativos = new JButton("+/-");
+
 
         ImageIcon icon, goku;
             icon = new ImageIcon("C:\\Users\\EliotAlfonsoAriasO\\Downloads\\casio.png");
@@ -67,179 +91,61 @@ public class Calculadora {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
 
-        c = new JButton("C");
-        gbc.gridx=0;
-        gbc.gridy=0;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        c.setBackground(Color.decode("#515A5A"));
-        teclado.add(c,gbc);
+        JButton[] botones = {
+                c, ce, porcentaje, division,
+                siete, ocho, nueve, multiplicacion,
+                cuatro, cinco, seis, resta,
+                uno, dos, tres, suma,
+                coma, cero, negativos,igual
+        };
 
-        ce = new JButton("CE");
-        gbc.gridx=1;
-        gbc.gridy=0;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        ce.setBackground(Color.decode("#515A5A"));
-        teclado.add(ce,gbc);
+        teclado.setLayout(new GridBagLayout());
 
-        porcentaje = new JButton("%");
-        gbc.gridx=2;
-        gbc.gridy=0;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        porcentaje.setBackground(Color.decode("#515A5A"));
-        teclado.add(porcentaje,gbc);
+        final boolean[] comaPulsada = {false};
+        final boolean[] operadoPulsado = {false};
 
-        division = new JButton("/");
-        gbc.gridx=3;
-        gbc.gridy=0;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        division.setBackground(Color.decode("#F1C40F"));
-        teclado.add(division,gbc);
+        for (int i = 0; i < botones.length; i++) {
 
-        siete = new JButton("7");
-        gbc.gridx=0;
-        gbc.gridy=1;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        siete.setBackground(Color.decode("#99A3A4"));
-        teclado.add(siete,gbc);
+                    gbc.gridx = i % 4; // Columna
+                    gbc.gridy = i / 4; // Fila
+                    gbc.gridwidth = 1;
+                    gbc.gridheight = 1;
+                    gbc.fill = GridBagConstraints.BOTH;
+                    gbc.weightx = 1.0;
+                    gbc.weighty = 1.0;
 
-        ocho = new JButton("8");
-        gbc.gridx=1;
-        gbc.gridy=1;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        ocho.setBackground(Color.decode("#99A3A4"));
-        teclado.add(ocho,gbc);
+            botones[i].setBackground(Color.decode("#99A3A4"));
+            teclado.add(botones[i], gbc);
 
-        nueve = new JButton("9");
-        gbc.gridx=2;
-        gbc.gridy=1;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        nueve.setBackground(Color.decode("#99A3A4"));
-        teclado.add(nueve,gbc);
-
-        multiplicacion = new JButton("x");
-        gbc.gridx=3;
-        gbc.gridy=1;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        multiplicacion.setBackground(Color.decode("#F1C40F"));
-        teclado.add(multiplicacion,gbc);
-
-        cuatro = new JButton("4");
-        gbc.gridx=0;
-        gbc.gridy=2;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        cuatro.setBackground(Color.decode("#99A3A4"));
-        teclado.add(cuatro,gbc);
-
-        cinco = new JButton("5");
-        gbc.gridx=1;
-        gbc.gridy=2;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        cinco.setBackground(Color.decode("#99A3A4"));
-        teclado.add(cinco,gbc);
-
-        seis = new JButton("6");
-        gbc.gridx=2;
-        gbc.gridy=2;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        seis.setBackground(Color.decode("#99A3A4"));
-        teclado.add(seis,gbc);
-
-        resta = new JButton("-");
-        gbc.gridx=3;
-        gbc.gridy=2;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        resta.setBackground(Color.decode("#F1C40F"));
-        teclado.add(resta,gbc);
-
-        uno = new JButton("1");
-        gbc.gridx=0;
-        gbc.gridy=3;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        uno.setBackground(Color.decode("#99A3A4"));
-        teclado.add(uno,gbc);
-
-        dos = new JButton("2");
-        gbc.gridx=1;
-        gbc.gridy=3;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        dos.setBackground(Color.decode("#99A3A4"));
-        teclado.add(dos,gbc);
-
-        tres = new JButton("3");
-        gbc.gridx=2;
-        gbc.gridy=3;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        tres.setBackground(Color.decode("#99A3A4"));
-        teclado.add(tres,gbc);
-
-        suma = new JButton("+");
-        gbc.gridx=3;
-        gbc.gridy=3;
-        gbc.gridwidth=1;
-        gbc.gridheight=2;
-        suma.setBackground(Color.decode("#F1C40F"));
-        teclado.add(suma,gbc);
-
-        coma = new JButton(",");
-        gbc.gridx=0;
-        gbc.gridy=4;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        coma.setBackground(Color.decode("#515A5A"));
-        teclado.add(coma,gbc);
+            int index = i;
+            botones[i].addActionListener(e -> {
+                String textoActual = texto_en_pantalla.getText();
+                String textoBotones = botones[index].getText();
 
 
-        final boolean[] pulsado = {false};
-
-        coma.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!pulsado[0]) {
-                    String textoActual = texto_en_pantalla.getText();
-                    textoActual += ",";
-                    texto_en_pantalla.setText(textoActual);
-                    pulsado[0] = true;
+                if (textoBotones.equals("CE")){
+                    textoActual = "";
                 }
-            }
+                if (textoBotones.equals(",") && !comaPulsada[0]) {
+                    textoActual += textoBotones;
+                    operadoPulsado [0] = false;
+                    comaPulsada [0] = true;
+                    coma.setEnabled(false);
+                }
+                if (textoBotones.equals("+") || textoBotones.equals("-") || textoBotones.equals("x") || textoBotones.equals("/") || textoBotones.equals("=")){
+                    textoActual += textoBotones;
+                    operadoPulsado[0] = true;
+                    comaPulsada[0] = false;
+                    coma.setEnabled(true);
+                }
+                else if (!textoBotones.equals(",") && !textoBotones.equals("CE")) {
+                    textoActual += textoBotones;
+                }
+
+                texto_en_pantalla.setText(textoActual);
 
         });
-
-        cero = new JButton("0");
-        gbc.gridx=1;
-        gbc.gridy=4;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        cero.setBackground(Color.decode("#99A3A4"));
-        teclado.add(cero,gbc);
-
-        cero.addActionListener(e -> {
-            String textoActual = texto_en_pantalla.getText();
-            textoActual += "0";
-            texto_en_pantalla.setText(textoActual);
-        });
-
-        igual = new JButton("=");
-        gbc.gridx=2;
-        gbc.gridy=4;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
-        igual.setBackground(Color.decode("#82E0AA"));
-        teclado.add(igual,gbc);
+    }
 
         pantalla.add(etiqueta);
         pantalla.add(etiqueta2);
@@ -252,11 +158,6 @@ public class Calculadora {
         ventana.setVisible(true);
 
 
-
-
     }
 
-    public static void main(String[] args) {
-        calculadora();
-    }
 }
