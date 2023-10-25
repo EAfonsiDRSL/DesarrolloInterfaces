@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Calculadora {
     public static void main(String[] args) {
@@ -103,7 +103,10 @@ public class Calculadora {
 
         final boolean[] comaPulsada = {false};
         final boolean[] operadoPulsado = {false};
-
+        AtomicReference<String> operador = new AtomicReference<>("");
+        AtomicReference<Double> n1 = new AtomicReference<>((double) 0);
+        AtomicReference<Double> n2 = new AtomicReference<>((double) 0);
+        AtomicReference<String> operacion = new AtomicReference<>("");
         for (int i = 0; i < botones.length; i++) {
 
                     gbc.gridx = i % 4; // Columna
@@ -125,27 +128,54 @@ public class Calculadora {
 
                 if (textoBotones.equals("CE")){
                     textoActual = "";
+
                 }
-                if (textoBotones.equals(",") && !comaPulsada[0]) {
+                else if (textoBotones.equals("C")) {
+                    if (!textoActual.isEmpty()){
+                        textoActual = textoActual.substring(0,textoActual.length()-1);
+                    }
+                }
+                else if (textoBotones.equals(",") && !comaPulsada[0]) {
                     textoActual += textoBotones;
                     operadoPulsado [0] = false;
                     comaPulsada [0] = true;
                     coma.setEnabled(false);
                 }
-                if (textoBotones.equals("+") || textoBotones.equals("-") || textoBotones.equals("x") || textoBotones.equals("/") || textoBotones.equals("=")){
+                 else if (textoBotones.equals("+") || textoBotones.equals("-") || textoBotones.equals("x") || textoBotones.equals("/")){
                     textoActual += textoBotones;
                     operadoPulsado[0] = true;
                     comaPulsada[0] = false;
                     coma.setEnabled(true);
                 }
-                else if (!textoBotones.equals(",") && !textoBotones.equals("CE")) {
+                else if (!textoBotones.equals(",")) {
                     textoActual += textoBotones;
                 }
+                else if (textoBotones.equals("+")) {
+                    operador.set("+");
+                    n1.set(Double.parseDouble(texto_en_pantalla.getText()));
+                    texto_en_pantalla.setText("");
+                }else if (textoBotones.equals("=")) {
+                    if (!operacion.get().isEmpty()) {
+                        try {
+                            double resultado = Double.parseDouble(evaluarOperacion(operacion.get()));
+                            textoActual = Double.toString(resultado);
+                            operacion.set(Double.toString(resultado));
+                        } catch (Exception ex) {
+                            textoActual = "Error";
+                            operacion.set("");
+                        }
+                    }
+                } else {
+                    textoActual += textoBotones;
+                    operacion.set(operacion.get() + textoBotones);
+                }
+
 
                 texto_en_pantalla.setText(textoActual);
 
         });
     }
+
 
         pantalla.add(etiqueta);
         pantalla.add(etiqueta2);
@@ -160,4 +190,18 @@ public class Calculadora {
 
     }
 
-}
+    private static String evaluarOperacion(String operacion) {
+        String[] partes = operacion.split("\\+");
+        double num1 = Double.parseDouble(partes[0]);
+        double num2 = Double.parseDouble(partes[1]);
+        double resultado = num1 + num2;
+        return Double.toString(resultado);
+    }
+
+
+
+
+
+    }
+
+
